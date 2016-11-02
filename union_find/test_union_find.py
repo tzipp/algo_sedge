@@ -4,10 +4,18 @@ from union_find import UnionFind, QuickFind
 
 
 class TestBaseUF:
+    def setup(self):
+        self.uf = UnionFind(10)
+
     def test_initialized_uf(self):
-        uf = UnionFind(10)
         for i in range(0, 10):
-            assert uf.ids[i] == i
+            assert self.uf.ids[i] == i
+
+    def test_union(self):
+        assert self.uf.union(1, 2) is None
+
+    def test_connected(self):
+        assert self.uf.connected(1, 2) is None
 
 
 class TestQuickFind:
@@ -20,6 +28,7 @@ class TestQuickFind:
 
     def test_0_1_joined(self):
         self.qf.union(0, 1)
+
         # Test connectedness by direct inspection.
         assert self.qf.ids[0] == 1
         assert self.qf.ids[1] == 1
